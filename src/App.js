@@ -23,14 +23,25 @@ class App extends Component {
     ]
   }
 
+  // App -> Header -> HabitForm
+  handleAddActivity = (name) => {
+    this.setState(prevState => ({
+      activities: prevState.activities.concat({ name })
+    }))
+    console.log(this.state.activities)
+  }
+
   render() {
     return (
       <Container>
-        <Header />
+        <Header addActivity={ this.handleAddActivity }/>
         <ListGroup variant="flush">
-        {this.state.activities.map(item => {
+        {this.state.activities.map( (item, index) => {
           return (
-            <Activity name={ item.name } />
+            <Activity
+            key={ (index + 1).toString() } 
+            name={ item.name } 
+            />
           )
         })}
         <Footer activities={ this.state.activities } />
