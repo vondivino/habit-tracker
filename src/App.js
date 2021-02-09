@@ -4,6 +4,7 @@ import { Container, ListGroup } from 'react-bootstrap';
 
 import Header from './components/Header';
 import Activity from './components/Activity';
+import Footer from './components/Footer';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -25,20 +26,14 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <Header 
-          activities={ this.state.activities }
-        />
+        <Header />
         <ListGroup variant="flush">
         {this.state.activities.map(item => {
           return (
-            <Activity 
-              name={ item.name }
-            />
+            <Activity name={ item.name } />
           )
         })}
-        <ListGroup.Item>
-          
-        </ListGroup.Item>
+        <Footer activities={ this.state.activities } />
         </ListGroup>
       </Container>
     )
