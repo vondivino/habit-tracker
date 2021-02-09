@@ -10,10 +10,24 @@ import './App.css';
 
 
 class App extends Component {
+
+  state = {
+    activities: [
+      {
+        name: 'Do coding'
+      },
+      {
+        name: 'Finish assigment'
+      }
+    ]
+  }
+
   render() {
     return (
       <Container>
-        <Header />
+        <Header 
+          activities={ this.state.activities }
+        />
       </Container>
     )
   }
