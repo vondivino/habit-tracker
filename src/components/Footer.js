@@ -1,28 +1,34 @@
 import React from 'react';
+
 import { Badge, ListGroup } from 'react-bootstrap';
 
-import PropTypes from 'prop-types';
+import { Consumer } from './Context';
 
-const Footer = ({ activities }) => {
-    const totalActivties = activities.length;
-
+const Footer = () => {
+    
     return (
-        <ListGroup.Item>
-            <Badge variant="primary">
-                Total Activities: { totalActivties }
-             </Badge>
-            <Badge variant="warning">
-                Unfinished: 3
-            </Badge>
-            <Badge variant="success">
-                Done: 2
-            </Badge>
-        </ListGroup.Item>
-    )
-}
+        <Consumer>
+            { ({ activities }) => {
 
-Footer.propTypes = {
-    activities: PropTypes.array.isRequired,
+                const totalActivties = activities.length;
+
+                return (
+                    <ListGroup.Item>
+                        <Badge variant="primary">
+                            Total Activities: { totalActivties }
+                        </Badge>
+                        <Badge variant="warning">
+                            Unfinished: 3
+                        </Badge>
+                        <Badge variant="success">
+                            Done: 2
+                        </Badge>
+                    </ListGroup.Item>
+                )
+            }}
+        </Consumer>
+        
+    )
 }
 
 export default Footer;

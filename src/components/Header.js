@@ -11,7 +11,7 @@ import HabitForm from './HabitForm';
 
 import PropTypes from 'prop-types';
 
-const Header = ({ title, addActivity }) => {
+const Header = ({ title }) => {
     return (
         <Jumbotron fluid>
             <Container>
@@ -20,7 +20,7 @@ const Header = ({ title, addActivity }) => {
                 </Row>
                 <Row className="justify-content-md-center">
                     <Col xs={6}>
-                        <HabitForm addActivity={ addActivity } />
+                        <HabitForm />
                     </Col>
                 </Row>
             </Container>

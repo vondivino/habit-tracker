@@ -11,4 +11,8 @@ const Activity = ({ name }) => {
     )
 }
 
+Activity.propTypes = {
+    name: PropTypes.string.isRequired
+}
+
 export default Activity;
