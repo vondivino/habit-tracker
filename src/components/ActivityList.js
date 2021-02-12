@@ -11,7 +11,7 @@ const ActivityList = () => {
         <Consumer>
             { ({ activities, actions }) => {
                 const doneActivity = actions.doneActivity;
-                
+
                 return (
                     <ListGroup variant="flush">
                         {activities.map((item, index) => {

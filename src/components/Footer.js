@@ -8,20 +8,21 @@ const Footer = () => {
     
     return (
         <Consumer>
-            { ({ activities }) => {
+            { ({ activities, done }) => {
 
                 const totalActivties = activities.length;
+                const totalDone = done.length;
 
                 return (
                     <ListGroup.Item>
                         <Badge variant="primary">
-                            Total Activities: { totalActivties }
+                            Total Activities: { totalActivties + totalDone }
                         </Badge>
                         <Badge variant="warning">
-                            Unfinished: 3
+                            Unfinished: { totalActivties }
                         </Badge>
                         <Badge variant="success">
-                            Done: 2
+                            Done: { totalDone }
                         </Badge>
                     </ListGroup.Item>
                 )

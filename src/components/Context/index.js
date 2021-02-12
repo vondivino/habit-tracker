@@ -50,6 +50,7 @@ export class Provider extends Component {
         return (
             <HabitTrackerContext.Provider value={{
                 activities: this.state.activities,
+                done: this.state.done,
                 actions: {
                     addActivity: this.handleAddActivity,
                     doneActivity: this.handleDoneActivity
