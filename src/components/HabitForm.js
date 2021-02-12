@@ -17,9 +17,14 @@ const HabitForm = () => {
         <Consumer>
             { ({ actions }) => {
 
+                {/* 
+                When this form will be submitted, the activityInput value 
+                will be added to the activities list in the Provider state.
+
+                Look for handleAddActivity from Context/Provider for reference.
+                */}
                 const handleForm = (e) => {
                     e.preventDefault();
-                    console.log(true)
                     actions.addActivity(activityInput.current.value);
                     e.currentTarget.reset();
                 }
