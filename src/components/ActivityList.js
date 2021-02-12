@@ -11,6 +11,7 @@ const ActivityList = () => {
         <Consumer>
             { ({ activities, actions }) => {
                 const doneActivity = actions.doneActivity;
+                const deleteActivity = actions.deleteActivity;
 
                 return (
                     <ListGroup variant="flush">
@@ -21,6 +22,7 @@ const ActivityList = () => {
                                     name={item.name}
                                     index={ index }
                                     doneActivity={ doneActivity }
+                                    deleteActivity={ deleteActivity }
                                 />
                             )
                         })}

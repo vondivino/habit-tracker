@@ -46,6 +46,19 @@ export class Provider extends Component {
         }))
     }
 
+    /* 
+    This event handler takes in the index of the activity and
+    remove to the activitites list. Then, a modal will popout
+    to confirm deletion.
+
+    This will be handled by ActivityModal.js
+    */
+    handleDeleteActivity = (index) => {
+        this.setState(prevState => ({
+            activities: prevState.activities.filter((item, i) => index !== i)
+        }))
+    }
+
     render() {
         return (
             <HabitTrackerContext.Provider value={{
@@ -53,7 +66,8 @@ export class Provider extends Component {
                 done: this.state.done,
                 actions: {
                     addActivity: this.handleAddActivity,
-                    doneActivity: this.handleDoneActivity
+                    doneActivity: this.handleDoneActivity,
+                    deleteActivity: this.handleDeleteActivity
                 }
             }}>
                 {/* Children will be inserted here  */}
