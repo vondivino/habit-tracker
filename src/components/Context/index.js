@@ -12,7 +12,8 @@ export class Provider extends Component {
             {
                 name: 'Finish assigment'
             }
-        ]
+        ],
+        done: [],
     }
 
     /* 
@@ -27,12 +28,31 @@ export class Provider extends Component {
         }))
     }
 
+    /* 
+    This event handler takes in the index of the activity and
+    remove to the activitites list. Then, that activity will be addded
+    to the done bin.
+
+    This will be handled by Activity.js
+    */
+    handleDoneActivity = (index) => {
+        const activities = this.state.activities;
+        const updatedActivities = activities.filter((item, i) => index !== i);
+
+        const doneActivity = activities[index];
+        this.setState(prevState => ({  
+            activities: updatedActivities,
+            done: prevState.done.concat(doneActivity)
+        }))
+    }
+
     render() {
         return (
             <HabitTrackerContext.Provider value={{
                 activities: this.state.activities,
                 actions: {
                     addActivity: this.handleAddActivity,
+                    doneActivity: this.handleDoneActivity
                 }
             }}>
                 {/* Children will be inserted here  */}

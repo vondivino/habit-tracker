@@ -9,7 +9,9 @@ import { Consumer } from './Context';
 const ActivityList = () => {
     return (
         <Consumer>
-            { ({ activities }) => {
+            { ({ activities, actions }) => {
+                const doneActivity = actions.doneActivity;
+                
                 return (
                     <ListGroup variant="flush">
                         {activities.map((item, index) => {
@@ -17,6 +19,8 @@ const ActivityList = () => {
                                 <Activity
                                     key={(index + 1).toString()}
                                     name={item.name}
+                                    index={ index }
+                                    doneActivity={ doneActivity }
                                 />
                             )
                         })}

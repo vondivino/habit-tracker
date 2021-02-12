@@ -3,7 +3,7 @@ import { ListGroup, ButtonGroup, Button, Row, Col } from 'react-bootstrap';
 
 import PropTypes from 'prop-types';
 
-const Activity = ({ name }) => {
+const Activity = ({ name, index, doneActivity }) => {
     return (
         <ListGroup.Item>
             <Row>
@@ -11,7 +11,9 @@ const Activity = ({ name }) => {
                 <Col xs lg={2} >
                     {/* Add actions to buttons */}
                     <ButtonGroup aria-label="Basic example" className="justif">
-                        <Button variant="success">Done</Button>
+                        <Button variant="success" onClick={() => doneActivity(index) }>
+                            Done
+                        </Button>
                         <Button variant="danger">Delete</Button>
                     </ButtonGroup>
                 </Col>
