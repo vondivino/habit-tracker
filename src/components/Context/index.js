@@ -7,13 +7,12 @@ export class Provider extends Component {
     state = {
         activities: [
             {
-                name: 'Do coding'
+                name: 'Do coding',
+                isRunning: false,
+                elapsedTime: 0,
+                prevTime: 0
             },
-            {
-                name: 'Finish assigment'
-            }
-        ],
-        done: [],
+        ]
     }
 
     /* 
@@ -35,15 +34,34 @@ export class Provider extends Component {
 
     This will be handled by Activity.js
     */
-    handleDoneActivity = (index) => {
-        const activities = this.state.activities;
-        const updatedActivities = activities.filter((item, i) => index !== i);
+    handleStartActivity = (index) => {
+        const activities = [...this.state.activities];
+        const activity = activities[index]
 
-        const doneActivity = activities[index];
-        this.setState(prevState => ({  
-            activities: updatedActivities,
-            done: prevState.done.concat(doneActivity)
-        }))
+        activity.isRunning = !activity.isRunning;
+        activity.prevTime = Date.now();
+        activities[index] = activity;
+        this.setState({ 
+            activties: activities
+        })
+
+               
+    }
+
+    tick = () => {
+        let currentIndex; 
+        const allActivities = [...this.state.activities];
+        const activity = allActivities.filter( (item, index) => {
+            currentIndex = index;
+            return item.isRunning;
+        });
+        if (activity.length > 0) {
+            const now = Date.now();
+            activity[0].elapsedTime += (now - activity[0].prevTime)
+            activity[0].prevTime = now;
+            allActivities[currentIndex] = activity; 
+            this.setState({ activties: allActivities })
+        }
     }
 
     /* 
@@ -54,9 +72,16 @@ export class Provider extends Component {
     This will be handled by ActivityModal.js
     */
     handleDeleteActivity = (index) => {
+        const activities = [...this.state.activities];
+        const activity = activities[index]
+
         this.setState(prevState => ({
             activities: prevState.activities.filter((item, i) => index !== i)
         }))
+    }
+
+    componentDidMount() {
+        this.intervalID = setInterval(() => this.tick(), 100)
     }
 
     render() {
@@ -66,7 +91,7 @@ export class Provider extends Component {
                 done: this.state.done,
                 actions: {
                     addActivity: this.handleAddActivity,
-                    doneActivity: this.handleDoneActivity,
+                    startActivity: this.handleStartActivity,
                     deleteActivity: this.handleDeleteActivity
                 }
             }}>

@@ -11,7 +11,14 @@ import ActivityModal from './ActivityModal';
 
 import PropTypes from 'prop-types';
 
-const Activity = ({ name, index, doneActivity, deleteActivity }) => {
+const Activity = ({ 
+    name, 
+    index, 
+    startActivity, 
+    deleteActivity, 
+    isRunning,
+    elapsedTime 
+}) => {
 
     const [show, setShow] = useState(false);
 
@@ -27,18 +34,19 @@ const Activity = ({ name, index, doneActivity, deleteActivity }) => {
         <ListGroup.Item>
             <Row>
                 <Col>{ name }</Col>
+                <Col>{ Math.floor(elapsedTime / 1000) } secs</Col>
                 <Col xs lg={2} >
                     {/* Add actions to buttons */}
                     <ButtonGroup aria-label="Basic example">
                         <Button 
-                        variant="success" 
-                        onClick={ () => doneActivity(index) }>
-                            Done
+                        variant={ isRunning ? 'warning':'success'} 
+                        onClick={ () => startActivity(index) }>
+                        { isRunning ? 'Pause':'Start'}
                         </Button>
                         <Button 
                         variant="danger" 
                         onClick={handleShow}>
-                            Delete
+                        { isRunning ? 'Stop':'Delete'}
                          </Button>
                     </ButtonGroup>
                 </Col>
@@ -57,6 +65,7 @@ const Activity = ({ name, index, doneActivity, deleteActivity }) => {
 Activity.propTypes = {
     name: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
+    elapsedTime: PropTypes.number.isRequired,
     doneActivity: PropTypes.func,
     deleteActivity: PropTypes.func,
 }

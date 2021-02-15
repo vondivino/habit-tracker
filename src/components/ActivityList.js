@@ -10,7 +10,7 @@ const ActivityList = () => {
     return (
         <Consumer>
             { ({ activities, actions }) => {
-                const doneActivity = actions.doneActivity;
+                const startActivity = actions.startActivity;
                 const deleteActivity = actions.deleteActivity;
 
                 return (
@@ -21,7 +21,9 @@ const ActivityList = () => {
                                     key={(index + 1).toString()}
                                     name={item.name}
                                     index={ index }
-                                    doneActivity={ doneActivity }
+                                    isRunning={ item.isRunning }
+                                    elapsedTime={ item.elapsedTime }
+                                    startActivity={ startActivity }
                                     deleteActivity={ deleteActivity }
                                 />
                             )
